@@ -8,13 +8,14 @@
 
   <style>
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1e40af;
-      --background: #f8fafc;
+      --blue-primary: #5f86b8;   /* logo blue */
+      --blue-dark: #4a6f9c;
+      --green-accent: #4f7c64;   /* logo green */
+      --background: #f4f6f8;
       --surface: #ffffff;
-      --text: #0f172a;
-      --muted: #475569;
-      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #4b5563;
+      --border: #e5e7eb;
     }
 
     * {
@@ -24,21 +25,21 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      color: var(--text);
       background-color: var(--background);
+      color: var(--text-main);
       line-height: 1.6;
     }
 
-    /* Full-width header */
+    /* Header */
     header {
       background-color: var(--surface);
       border-bottom: 1px solid var(--border);
     }
 
     .header-inner {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 20px 28px;
+      padding: 22px 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -47,24 +48,24 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 18px;
     }
 
     .brand img {
-      height: 72px;
+      height: 84px;
     }
 
     .brand-name {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 600;
       letter-spacing: -0.02em;
     }
 
     nav a {
-      margin-left: 32px;
+      margin-left: 36px;
       text-decoration: none;
       font-weight: 500;
-      color: var(--text);
+      color: var(--text-main);
       position: relative;
     }
 
@@ -72,10 +73,10 @@
       content: "";
       position: absolute;
       left: 0;
-      bottom: -6px;
+      bottom: -8px;
       width: 0;
       height: 2px;
-      background-color: var(--primary);
+      background-color: var(--blue-primary);
       transition: width 0.2s ease;
     }
 
@@ -83,41 +84,41 @@
       width: 100%;
     }
 
-    /* Page container */
-    .container {
-      max-width: 1200px;
+    /* Main container */
+    main {
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 80px 28px;
+      padding: 96px 32px;
     }
 
     /* Hero */
     .hero {
       display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 64px;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 72px;
       align-items: center;
-      margin-bottom: 120px;
+      margin-bottom: 140px;
     }
 
     .hero h1 {
-      font-size: 48px;
+      font-size: 52px;
       font-weight: 700;
       line-height: 1.1;
-      margin-bottom: 20px;
       letter-spacing: -0.03em;
+      margin-bottom: 22px;
     }
 
     .hero p {
       font-size: 19px;
-      color: var(--muted);
-      margin-bottom: 36px;
-      max-width: 520px;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 40px;
     }
 
     .buttons a {
       display: inline-block;
-      padding: 16px 28px;
-      margin-right: 18px;
+      padding: 16px 30px;
+      margin-right: 20px;
       border-radius: 10px;
       font-weight: 600;
       text-decoration: none;
@@ -125,86 +126,82 @@
     }
 
     .primary {
-      background-color: var(--primary);
+      background-color: var(--blue-primary);
       color: #fff;
     }
 
     .primary:hover {
-      background-color: var(--primary-dark);
+      background-color: var(--blue-dark);
     }
 
     .secondary {
-      border: 2px solid var(--primary);
-      color: var(--primary);
+      border: 2px solid var(--green-accent);
+      color: var(--green-accent);
       background-color: #fff;
     }
 
     .secondary:hover {
-      background-color: #eff6ff;
+      background-color: #f0f6f3;
     }
 
     /* Feature card */
     .feature {
       background-color: var(--surface);
-      border-radius: 16px;
-      padding: 40px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+      border-radius: 18px;
+      padding: 44px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.05);
     }
 
     .feature h3 {
       margin-top: 0;
       font-size: 22px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     /* Sections */
     .sections {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 36px;
-      margin-bottom: 120px;
+      gap: 40px;
+      margin-bottom: 140px;
     }
 
     .card {
       background-color: var(--surface);
-      border-radius: 16px;
-      padding: 36px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.04);
     }
 
     .card h3 {
       margin-top: 0;
       font-size: 20px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     /* Footer */
     footer {
       border-top: 1px solid var(--border);
-      padding: 48px 28px;
-      font-size: 14px;
-      color: var(--muted);
-      max-width: 1200px;
+      padding: 56px 32px;
+      max-width: 1240px;
       margin: 0 auto;
+      font-size: 14px;
+      color: var(--text-muted);
     }
 
     footer a {
-      color: var(--muted);
+      color: var(--text-muted);
       text-decoration: none;
-      margin-right: 20px;
+      margin-right: 22px;
     }
 
     footer a:hover {
-      color: var(--primary);
+      color: var(--blue-primary);
     }
 
     @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
-      }
-
-      nav a {
-        margin-left: 20px;
       }
     }
   </style>
@@ -229,16 +226,17 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="container">
+  <!-- Main -->
+  <main>
 
     <!-- Hero -->
     <section class="hero">
       <div>
         <h1>Buying and selling Pokémon cards.</h1>
         <p>
-          CardCollectables is an independent startup focused on purchasing bulk
-          collections and reselling individual cards through trusted marketplaces.
+          CardCollectables is an independent startup focused on buying Pokémon
+          card bulk and collections, and reselling individual cards through
+          trusted marketplaces like eBay.
         </p>
 
         <div class="buttons">
@@ -248,13 +246,13 @@
       </div>
 
       <div class="feature">
-        <h3>How it works</h3>
+        <h3>Our approach</h3>
         <p>
-          Submit details of your bulk or collection. Once received, cards are
-          reviewed and an offer is made based on condition and current demand.
+          We aim to keep things simple. Submissions are reviewed after receipt,
+          and offers are made based on condition and market demand.
         </p>
         <p>
-          No pressure, no upfront guarantees — just clear communication.
+          No inflated claims, no pressure — just a straightforward process.
         </p>
       </div>
     </section>
@@ -264,24 +262,24 @@
       <div class="card">
         <h3>Sell Bulk</h3>
         <p>
-          We buy mixed Pokémon bulk and small collections. If it’s a good fit,
-          we’ll guide you through the next steps.
+          Have Pokémon bulk or a small collection? Submit the details and we’ll
+          let you know if it’s a good fit.
         </p>
       </div>
 
       <div class="card">
         <h3>Where we sell</h3>
         <p>
-          Our inventory is sold primarily on eBay, providing transparency,
-          feedback history, and buyer protections.
+          Our cards are sold primarily on eBay, offering transparency through
+          public feedback and buyer protections.
         </p>
       </div>
 
       <div class="card">
         <h3>What’s new</h3>
         <p>
-          Updates on recent pickups, bulk intake availability, and site changes
-          will be shared as CardCollectables grows.
+          Updates on recent purchases, changes to bulk intake, and future plans
+          will be shared here as CardCollectables grows.
         </p>
       </div>
     </section>
