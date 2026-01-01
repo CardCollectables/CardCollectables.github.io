@@ -2,17 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Your Brand Name</title>
-  <meta name="description" content="Independent Pokémon card reseller. Buying bulk collections and selling singles through eBay.">
+  <title>CardCollectables</title>
+  <meta name="description" content="CardCollectables is an independent Pokémon card reseller, buying bulk collections and selling singles through eBay.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     :root {
-      --primary: #2563eb;      /* blue */
-      --secondary: #16a34a;    /* green */
-      --background: #f8fafc;   /* light gray */
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --background: #f8fafc;
+      --surface: #ffffff;
       --text: #0f172a;
       --muted: #475569;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -23,61 +29,99 @@
       line-height: 1.6;
     }
 
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 32px 20px;
+    /* Full-width header */
+    header {
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
     }
 
-    header {
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 64px;
     }
 
-    header img {
-      height: 52px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand img {
+      height: 72px;
+    }
+
+    .brand-name {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
     }
 
     nav a {
-      margin-left: 24px;
+      margin-left: 32px;
       text-decoration: none;
-      color: var(--text);
       font-weight: 500;
+      color: var(--text);
+      position: relative;
     }
 
-    nav a:hover {
-      color: var(--primary);
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.2s ease;
     }
 
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Page container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 28px;
+    }
+
+    /* Hero */
     .hero {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
-      gap: 48px;
+      gap: 64px;
       align-items: center;
-      margin-bottom: 96px;
+      margin-bottom: 120px;
     }
 
     .hero h1 {
-      font-size: 42px;
-      font-weight: 600;
-      margin-bottom: 16px;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
     }
 
     .hero p {
-      font-size: 18px;
+      font-size: 19px;
       color: var(--muted);
-      margin-bottom: 32px;
+      margin-bottom: 36px;
+      max-width: 520px;
     }
 
     .buttons a {
       display: inline-block;
-      padding: 14px 22px;
-      margin-right: 16px;
-      border-radius: 8px;
+      padding: 16px 28px;
+      margin-right: 18px;
+      border-radius: 10px;
+      font-weight: 600;
       text-decoration: none;
-      font-weight: 500;
+      font-size: 16px;
     }
 
     .primary {
@@ -85,82 +129,116 @@
       color: #fff;
     }
 
+    .primary:hover {
+      background-color: var(--primary-dark);
+    }
+
     .secondary {
-      background-color: #fff;
       border: 2px solid var(--primary);
       color: var(--primary);
+      background-color: #fff;
     }
 
     .secondary:hover {
       background-color: #eff6ff;
     }
 
-    .card {
-      background-color: #fff;
-      border-radius: 12px;
-      padding: 32px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    /* Feature card */
+    .feature {
+      background-color: var(--surface);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
     }
 
+    .feature h3 {
+      margin-top: 0;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    /* Sections */
     .sections {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 32px;
-      margin-bottom: 96px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 36px;
+      margin-bottom: 120px;
     }
 
-    .sections h3 {
+    .card {
+      background-color: var(--surface);
+      border-radius: 16px;
+      padding: 36px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .card h3 {
       margin-top: 0;
-      margin-bottom: 12px;
       font-size: 20px;
+      margin-bottom: 12px;
     }
 
+    /* Footer */
     footer {
-      border-top: 1px solid #e2e8f0;
-      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      padding: 48px 28px;
       font-size: 14px;
       color: var(--muted);
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     footer a {
       color: var(--muted);
       text-decoration: none;
-      margin-right: 16px;
+      margin-right: 20px;
     }
 
     footer a:hover {
       color: var(--primary);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
+      }
+
+      nav a {
+        margin-left: 20px;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
 
-    <!-- Header -->
-    <header>
-      <img src="/images/LogoFull.png" alt="Your Brand Logo">
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <img src="/images/LogoFull.png" alt="CardCollectables Logo">
+        <span class="brand-name">CardCollectables</span>
+      </div>
+
       <nav>
         <a href="/">Home</a>
         <a href="/bulk">Sell Bulk</a>
         <a href="/about">About</a>
         <a href="/whats-new">What’s New</a>
       </nav>
-    </header>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
 
     <!-- Hero -->
     <section class="hero">
       <div>
         <h1>Buying and selling Pokémon cards.</h1>
         <p>
-          We’re an independent startup focused on sourcing collections and bulk,
-          and reselling individual cards through established marketplaces.
+          CardCollectables is an independent startup focused on purchasing bulk
+          collections and reselling individual cards through trusted marketplaces.
         </p>
 
         <div class="buttons">
@@ -169,62 +247,59 @@
         </div>
       </div>
 
-      <div class="card">
-        <h3>What we do</h3>
+      <div class="feature">
+        <h3>How it works</h3>
         <p>
-          We purchase Pokémon card bulk and small collections from collectors
-          looking for a straightforward, low-pressure process.
+          Submit details of your bulk or collection. Once received, cards are
+          reviewed and an offer is made based on condition and current demand.
         </p>
         <p>
-          Cards are reviewed after receipt, and offers are made based on condition
-          and current market demand.
+          No pressure, no upfront guarantees — just clear communication.
         </p>
       </div>
     </section>
 
-    <!-- Info Sections -->
+    <!-- Sections -->
     <section class="sections">
       <div class="card">
         <h3>Sell Bulk</h3>
         <p>
-          Have bulk or a mixed collection? Submit the details and we’ll let you
-          know if it’s a good fit.
-        </p>
-        <p>
-          No guarantees until review — just clear communication.
+          We buy mixed Pokémon bulk and small collections. If it’s a good fit,
+          we’ll guide you through the next steps.
         </p>
       </div>
 
       <div class="card">
         <h3>Where we sell</h3>
         <p>
-          Our cards are sold primarily through eBay, using a trusted platform
-          with buyer protections and transparent feedback.
+          Our inventory is sold primarily on eBay, providing transparency,
+          feedback history, and buyer protections.
         </p>
       </div>
 
       <div class="card">
         <h3>What’s new</h3>
         <p>
-          Updates on recent pickups, changes to bulk rates, and future plans
-          will be shared here as we grow.
+          Updates on recent pickups, bulk intake availability, and site changes
+          will be shared as CardCollectables grows.
         </p>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-      <p>
-        © Your Brand Name<br>
-        Independent reseller of authentic Pokémon trading cards.
-      </p>
+  </main>
 
-      <p>
-        <a href="https://www.ebay.com/str/YOURSTORE">eBay</a>
-        <a href="https://instagram.com/YOURHANDLE">Instagram</a>
-      </p>
-    </footer>
+  <!-- Footer -->
+  <footer>
+    <p>
+      © CardCollectables<br>
+      Independent reseller of authentic Pokémon trading cards.
+    </p>
 
-  </div>
+    <p>
+      <a href="https://www.ebay.com/str/YOURSTORE">eBay</a>
+      <a href="https://instagram.com/YOURHANDLE">Instagram</a>
+    </p>
+  </footer>
+
 </body>
 </html>
