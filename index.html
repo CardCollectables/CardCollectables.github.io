@@ -3,20 +3,171 @@
 <head>
   <meta charset="UTF-8">
   <title>Your Brand Name</title>
-  <meta name="description" content="We buy Pokémon card bulk and collections.">
+  <meta name="description" content="We buy Pokémon card bulk and collections. Fair, transparent, and professional.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #111;
+      background-color: #fff;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 80px;
+    }
+
+    header img {
+      height: 48px;
+    }
+
+    nav a {
+      margin-left: 24px;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      max-width: 640px;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #444;
+      margin-bottom: 32px;
+    }
+
+    .buttons a {
+      display: inline-block;
+      padding: 12px 20px;
+      margin-right: 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .primary {
+      background-color: #111;
+      color: #fff;
+    }
+
+    .secondary {
+      border: 1px solid #111;
+      color: #111;
+    }
+
+    .trust {
+      margin-top: 100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+    }
+
+    .trust div h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      margin-top: 120px;
+      padding-top: 40px;
+      border-top: 1px solid #eee;
+      font-size: 14px;
+      color: #666;
+    }
+
+    footer a {
+      color: #666;
+      text-decoration: none;
+      margin-right: 16px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Your Brand Name</h1>
-  <p>We buy Pokémon card bulk and collections.</p>
+  <div class="container">
 
-  <nav>
-    <a href="/">Home</a> |
-    <a href="/bulk">Sell Bulk</a> |
-    <a href="/about">About</a>
-  </nav>
+    <!-- Header -->
+    <header>
+      <img src="/images/logo.png" alt="Your Brand Logo">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/bulk">Sell Bulk</a>
+        <a href="/about">About</a>
+      </nav>
+    </header>
 
-  <p>
-    <a href="https://www.ebay.com/str/YOURSTORE">Shop on eBay</a>
-  </p>
+    <!-- Hero -->
+    <section class="hero">
+      <h1>We buy Pokémon card bulk and collections.</h1>
+      <p>
+        A straightforward, transparent process for sellers.
+        Submissions are reviewed carefully, with payment issued after inspection.
+      </p>
+
+      <div class="buttons">
+        <a class="primary" href="/bulk">Submit Bulk</a>
+        <a class="secondary" href="https://www.ebay.com/str/YOURSTORE">Shop on eBay</a>
+      </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust">
+      <div>
+        <h3>Transparent Process</h3>
+        <p>No upfront promises. Every submission is reviewed fairly after receipt.</p>
+      </div>
+
+      <div>
+        <h3>Experienced Seller</h3>
+        <p>Years of buying, grading, and selling Pokémon cards through established marketplaces.</p>
+      </div>
+
+      <div>
+        <h3>Seller-Focused</h3>
+        <p>Clear communication, honest condition standards, and no pressure.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        © Your Brand Name<br>
+        Independent buyer and reseller of authentic Pokémon trading cards.
+      </p>
+
+      <p>
+        <a href="https://www.ebay.com/str/YOURSTORE">eBay</a>
+        <a href="https://instagram.com/YOURHANDLE">Instagram</a>
+      </p>
+    </footer>
+
+  </div>
 </body>
 </html>
