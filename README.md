@@ -1,1 +1,0 @@
-# CardCollectables.github.io
