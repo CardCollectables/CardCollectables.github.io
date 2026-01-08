@@ -130,10 +130,10 @@ nav.mobile-nav a {
 main {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 80px 24px 120px;
+  padding: 60px 24px 60px;
 }
 
-.whatsnew-wrapper { max-width: 1240px; margin: 0 auto; }
+.whatsnew-wrapper { max-width: 900px; margin: 0 auto; }
 
 .whatsnew-title { 
   font-size: 36px; 
@@ -146,89 +146,6 @@ main {
   color: var(--text-muted);
   text-align: center;
   margin-bottom: 36px;
-}
-
-.tile-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 24px;
-}
-
-.tile {
-  background: linear-gradient(180deg,#ffffff 0%,#f7fafd 100%);
-  border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 24px 55px rgba(95,134,184,0.18);
-  border: 1px solid var(--border);
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  position: relative;
-}
-
-.tile:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 32px 75px rgba(95,134,184,0.25);
-}
-
-.gallery-wrapper {
-  position: relative;
-}
-
-.gallery-wrapper img {
-  width: 100%;
-  border-radius: 12px;
-  cursor: pointer;
-  display: block;
-}
-
-/* Gallery buttons */
-.gallery-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(95,134,184,0.7);
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 6px;
-  z-index: 10;
-}
-
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
-
-/* ================= MODAL ================= */
-#modal {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
-
-#modal img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 16px;
-}
-
-#modal.close {
-  cursor: pointer;
-}
-
-.tile h3 {
-  font-size: 20px;
-  margin: 8px 0;
-}
-
-.tile p {
-  font-size: 14px;
-  color: var(--text-muted);
 }
 
 /* ================= FOOTER ================= */
@@ -246,16 +163,59 @@ footer a:hover { color: var(--blue-primary); }
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-  .header-inner { flex-wrap: wrap; }
+  .header-inner { 
+    flex-wrap: wrap; 
+    padding: 16px 24px;
+  }
+  
+  .brand img { height: 70px; }
+  
   nav.desktop-nav { display: none; }
   .hamburger { display: flex; }
-  main { padding: 60px 16px 80px; }
+  
+  main { padding: 40px 16px 80px; }
+  
+  .whatsnew-title { font-size: 28px; margin-bottom: 16px; }
+  .whatsnew-subheader { font-size: 16px; margin-bottom: 24px; }
+  
+  div[style*="padding: 12px 40px"] {
+    padding: 12px 24px 24px 24px !important;
+  }
+  
+  p[style*="font-size: 16px"] { font-size: 14px !important; }
 }
 
 @media (max-width: 480px) {
-  .whatsnew-title { font-size: 28px; margin-bottom: 24px; }
-  .tile h3 { font-size: 18px; }
-  .tile p { font-size: 13px; }
+  .header-inner { 
+    padding: 12px 16px;
+  }
+  
+  .brand img { height: 60px; }
+  
+  main { padding: 20px 12px 60px; }
+  
+  .whatsnew-title { font-size: 24px; margin-bottom: 12px; }
+  .whatsnew-subheader { font-size: 14px; margin-bottom: 20px; }
+  
+  div[style*="padding: 12px 40px"] {
+    padding: 12px 16px 24px 16px !important;
+    border-radius: 16px;
+  }
+  
+  p[style*="font-size: 16px"] { 
+    font-size: 13px !important; 
+    margin: 12px 0 !important;
+  }
+  
+  a[href*="ebay.co.uk"] {
+    padding: 10px 24px !important;
+    font-size: 14px !important;
+  }
+  
+  footer {
+    padding: 24px 16px;
+    font-size: 12px;
+  }
 }
 </style>
 </head>
@@ -288,22 +248,16 @@ footer a:hover { color: var(--blue-primary); }
 </header>
 
 <main>
-  <section class="whatsnew-wrapper">
-    <h1 class="whatsnew-title">What’s New</h1>
-    <h2 class="whatsnew-subheader">New Pokémon cards recently added to our eBay listings.</h2>
-
-    <div id="listings-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
-      <p style="text-align: center; color: var(--text-muted); grid-column: 1 / -1;">Loading your live listings...</p>
+  <section class="whatsnew-wrapper" style="text-align: center;">
+    <div style="margin-top: 0; padding: 12px 40px 40px 40px; background: linear-gradient(180deg,#ffffff 0%,#f7fafd 100%); border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 32px 75px rgba(95,134,184,0.18);">
+      <h1 class="whatsnew-title">Coming Soon</h1>
+      <h2 class="whatsnew-subheader">We're currently working on this page to bring you our newest eBay listings.</h2>
+      <p style="font-size: 16px; color: var(--text-muted); margin: 20px 0;">In the meantime, check out our current listings directly on eBay:</p>
+      <a href="https://www.ebay.co.uk/usr/card-collectables" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: var(--blue-primary); color: white; text-decoration: none; padding: 12px 32px; border-radius: 8px; font-weight: 600; transition: background-color 0.2s ease;">View on eBay</a>
     </div>
   </section>
 </main>
 
-
-
-<!-- Zoom Modal -->
-<div id="modal">
-  <img src="" alt="Zoomed Card">
-</div>
 
 <footer>
   <p>© CardCollectables<br>Independent reseller of authentic Pokémon trading cards.</p>
@@ -319,91 +273,6 @@ hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('active');
   mobileNav.classList.toggle('active');
 });
-
-// Gallery functionality
-document.querySelectorAll('.tile').forEach(tile => {
-  const imgs = tile.querySelectorAll('.gallery-wrapper img');
-  let index = 0;
-
-  const showImage = i => {
-    imgs.forEach((img, idx) => img.style.display = (idx === i ? 'block' : 'none'));
-  }
-
-  tile.querySelector('.next-btn').addEventListener('click', e => {
-    e.stopPropagation();
-    index = (index + 1) % imgs.length;
-    showImage(index);
-  });
-
-  tile.querySelector('.prev-btn').addEventListener('click', e => {
-    e.stopPropagation();
-    index = (index - 1 + imgs.length) % imgs.length;
-    showImage(index);
-  });
-
-  // Zoom functionality
-  imgs.forEach(img => {
-    img.addEventListener('click', () => {
-      const modal = document.getElementById('modal');
-      modal.style.display = 'flex';
-      modal.querySelector('img').src = img.src;
-    });
-  });
-});
-
-// Close modal on click
-document.getElementById('modal').addEventListener('click', () => {
-  document.getElementById('modal').style.display = 'none';
-});
-
-// --- Fetch and render live eBay listings from generated JSON ---
-(async function loadListings() {
-  const container = document.getElementById('listings-container');
-  
-  try {
-    const res = await fetch('/data/listings.json');
-    if (!res.ok) throw new Error('Failed to fetch listings.json');
-    
-    const listings = await res.json();
-    if (!Array.isArray(listings) || listings.length === 0) {
-      throw new Error('No listings in data file');
-    }
-    
-    // Render
-    container.innerHTML = '';
-    const now = Date.now();
-    const FIVE_DAYS_MS = 5 * 24 * 60 * 60 * 1000;
-
-    listings.forEach(item => {
-      const listingDate = new Date(item.listingDate);
-      const isNew = (now - listingDate.getTime()) <= FIVE_DAYS_MS;
-      
-      const card = document.createElement('a');
-      card.href = item.url || `https://www.ebay.co.uk/usr/card-collectables`;
-      card.target = '_blank';
-      card.rel = 'noopener noreferrer';
-      card.style.textDecoration = 'none';
-      card.style.color = 'inherit';
-      card.className = 'tile';
-      
-      const html = `
-        <div style="position: relative; height: 100%;">
-          ${isNew ? '<span style="position: absolute; top: 8px; left: 8px; background: #dc2626; color: #fff; padding: 4px 6px; font-size: 11px; font-weight: 700; border-radius: 6px;">NEW</span>' : ''}
-          <div style="padding: 12px;">
-            <h3 style="font-size: 14px; margin: 0 0 8px; word-break: break-word;">${item.title}</h3>
-            <p style="font-size: 13px; color: var(--blue-primary); font-weight: 600; margin: 8px 0 0;">£${item.price}</p>
-          </div>
-        </div>
-      `;
-      card.innerHTML = html;
-      container.appendChild(card);
-    });
-
-  } catch (e) {
-    console.error('Failed to load listings:', e);
-    container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #dc2626;">Unable to load listings. <a href="https://www.ebay.co.uk/usr/card-collectables" target="_blank">View on eBay</a></p>';
-  }
-})();
 </script>
 </body>
 </html>

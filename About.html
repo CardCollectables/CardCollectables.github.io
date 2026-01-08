@@ -130,7 +130,7 @@ nav.mobile-nav a {
 main {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 80px 24px 120px;
+  padding: 60px 24px 60px;
 }
 
 .about-wrapper { max-width: 900px; margin: 0 auto; }
@@ -138,13 +138,16 @@ main {
 .about-card {
   background: linear-gradient(180deg,#ffffff 0%,#f7fafd 100%);
   border-radius: 24px;
-  padding: 40px;
+  padding: 12px 40px 40px 40px;
   box-shadow: 0 32px 75px rgba(95,134,184,0.18);
   border: 1px solid var(--border);
 }
 
-.about-card h1 { font-size: 36px; margin-bottom: 24px; }
-.about-card p { font-size: 16px; color: var(--text-muted); margin-bottom: 20px; }
+.about-card h1 { font-size: 36px; margin-bottom: 24px; color: var(--blue-primary); }
+.about-card h2 { font-size: 24px; margin-top: 32px; margin-bottom: 16px; color: var(--blue-primary); }
+.about-card p { font-size: 16px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.8; }
+
+.highlight { color: var(--blue-primary); font-weight: 600; }
 
 /* ================= FOOTER ================= */
 footer {
@@ -161,16 +164,42 @@ footer a:hover { color: var(--blue-primary); }
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-  .header-inner { flex-wrap: wrap; }
+  .header-inner { 
+    flex-wrap: wrap; 
+    padding: 16px 24px;
+  }
+  
+  .brand img { height: 70px; }
+  
   nav.desktop-nav { display: none; }
   .hamburger { display: flex; }
-  main { padding: 60px 16px 80px; }
+  
+  main { padding: 40px 16px 80px; }
   .about-card { padding: 28px; }
+  
+  .about-card h1 { font-size: 28px; margin-bottom: 20px; }
+  .about-card h2 { font-size: 20px; margin-top: 24px; }
+  .about-card p { font-size: 14px; margin-bottom: 16px; }
 }
 
 @media (max-width: 480px) {
-  .about-card h1 { font-size: 28px; }
-  .about-card p { font-size: 14px; margin-bottom: 16px; }
+  .header-inner { 
+    padding: 12px 16px;
+  }
+  
+  .brand img { height: 60px; }
+  
+  main { padding: 20px 12px 60px; }
+  .about-card { padding: 20px; }
+  
+  .about-card h1 { font-size: 24px; margin-bottom: 16px; }
+  .about-card h2 { font-size: 18px; margin-top: 20px; margin-bottom: 12px; }
+  .about-card p { font-size: 13px; margin-bottom: 14px; }
+  
+  footer {
+    padding: 24px 16px;
+    font-size: 12px;
+  }
 }
 </style>
 </head>
@@ -203,13 +232,28 @@ footer a:hover { color: var(--blue-primary); }
 </header>
 
 <main>
-  <section class="about-wrapper">
-    <div class="about-card">
+  <section class="about-wrapper" style="text-align: center;">
+    <div style="margin-top: 0; padding: 12px 40px 40px 40px; background: linear-gradient(180deg,#ffffff 0%,#f7fafd 100%); border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 32px 75px rgba(95,134,184,0.18);">
       <h1>About CardCollectables</h1>
-      <p>CardCollectables is an independent Pokémon card reseller, dedicated to providing a transparent and fair process for buying bulk collections and reselling singles.</p>
-      <p>Our mission is simple: we want collectors to feel confident that their cards are valued properly and sold securely. We focus on authentic Pokémon cards and maintain clear communication at every step.</p>
-      <p>We purchase bulk Pokémon card collections from collectors of all sizes, evaluate them quickly, and provide a fair estimate. Cards suitable for resale are sold primarily on eBay with public feedback and buyer protection in place.</p>
-      <p>At CardCollectables, there’s no pressure and no inflated claims. Our goal is to create a trustworthy and professional Pokémon card marketplace where both sellers and buyers feel valued.</p>
+      
+      <p>At CardCollectables, we have a huge <span class="highlight">passion for Pokemon cards</span>. Since 2019, collecting has been more than a hobby - it's our way of life. We're completely <span class="highlight">cardboard mad</span>, and it shows in everything we do.</p>
+
+      <h2>Our Story</h2>
+      <p>What started as a shared interest quickly became an all-consuming collection. We've spent years building our knowledge, understanding card values, and learning every detail about grading, condition, and market trends. We've hunted for rare finds, celebrated big pulls, and invested countless hours in this community we love.</p>
+
+      <p>That deep knowledge and genuine enthusiasm is what drives CardCollectables. We understand what collectors value because we're collectors ourselves. We know the excitement of finding hidden gems and the care required to preserve them properly.</p>
+
+      <h2>Why We Started This</h2>
+      <p>We noticed a gap in how trading cards were being handled. Sometimes with pressure, sometimes with unclear valuations, and often without genuine care. We decided to bring our passion into a business that reflects our values: <span class="highlight">Transparency, fairness, and respect for every collection regardless of value</span>.</p>
+
+      <p>When you work with us, you're working with real collectors who understand your cards. We evaluate every collection thoughtfully, provide honest assessments, and handle each piece with the respect it deserves.</p>
+
+      <h2>What We Do</h2>
+      <p>We purchase Pokemon card and collections of all sizes, grades, and eras. Whether you've got a handful of commons or a portfolio of vintage holographics, we approach every submission with the same level of care and attention. We buy your unwanted items in bulk, so you don't have to worry about individually selling.</p>
+
+      <p>Our goal is simple: Create a trustworthy, professional experience where both sellers and buyers feel genuinely valued. Because at the end of the day, we're all in this for the same reason - we love trading cards, and we want to share that passion with others.</p>
+
+      <p style="margin-top: 32px; font-style: italic; color: var(--blue-primary);">Thanks for being part of our journey. 💎<br><br>- CardCollectables</p>
     </div>
   </section>
 </main>

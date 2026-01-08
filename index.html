@@ -134,7 +134,7 @@ nav.mobile-nav a {
 main {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 110px 36px 160px;
+  padding: 60px 24px 60px;
 }
 
 /* ================= HERO ================= */
@@ -143,7 +143,7 @@ main {
   grid-template-columns: 1.25fr 1fr;
   gap: 64px;
   align-items: center;
-  margin-bottom: 160px;
+  margin-bottom: 80px;
 }
 
 .hero h1 {
@@ -187,6 +187,38 @@ main {
 
 .secondary:hover { background-color: #f0f6f3; }
 
+/* ================= HIGH-VALUE SECTION ================= */
+.high-value {
+  background: linear-gradient(160deg, var(--green-accent), #3d6b54);
+  color: #ffffff;
+  border-radius: 24px;
+  padding: 54px;
+  box-shadow: 0 40px 80px rgba(79,124,100,0.35);
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+.high-value h2 { margin-top: 0; font-size: 32px; margin-bottom: 16px; }
+.high-value p { color: rgba(255,255,255,0.95); margin-bottom: 28px; font-size: 18px; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+.quote-btn {
+  display: inline-block;
+  padding: 16px 40px;
+  background-color: #ffffff;
+  color: var(--green-accent);
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.quote-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+}
+
 /* ================= FEATURE ================= */
 .feature {
   background: linear-gradient(160deg, var(--blue-primary), var(--blue-dark));
@@ -204,7 +236,7 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 44px;
-  margin-bottom: 160px;
+  margin-bottom: 0;
 }
 
 .card {
@@ -237,31 +269,63 @@ footer a:hover { color: var(--blue-primary); }
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) {
-  .hero { grid-template-columns: 1fr; gap: 40px; margin-bottom: 100px; }
+  .hero { grid-template-columns: 1fr; gap: 40px; margin-bottom: 60px; }
   .hero h1 { font-size: 44px; }
   .hero p { font-size: 17px; max-width: 100%; }
-  .feature { padding: 36px; }
-  .sections { grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 120px; }
+  .feature { padding: 36px; margin-bottom: 50px; }
+  .high-value { padding: 36px; margin-bottom: 50px; }
+  .high-value h2 { font-size: 28px; margin-bottom: 12px; }
+  .high-value p { font-size: 16px; margin-bottom: 20px; }
+  .sections { grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 80px; }
   .card { padding: 36px; }
 }
 
 @media (max-width: 768px) {
-  .header-inner { flex-wrap: wrap; }
+  .header-inner { flex-wrap: wrap; padding: 16px 24px; }
+  .brand img { height: 70px; }
   nav.desktop-nav { display: none; }
   .hamburger { display: flex; }
-  .hero h1 { font-size: 36px; }
-  .hero p { font-size: 16px; }
-  .buttons a { padding: 14px 28px; font-size: 15px; margin-right: 12px; margin-bottom: 12px; display: inline-block; }
-  .sections { grid-template-columns: 1fr; gap: 20px; margin-bottom: 80px; }
+  main { padding: 40px 16px 60px; }
+  .hero { gap: 30px; margin-bottom: 30px; }
+  .hero h1 { font-size: 32px; margin-bottom: 16px; }
+  .hero p { font-size: 15px; margin-bottom: 32px; }
+  .buttons a { padding: 12px 24px; font-size: 14px; margin-right: 10px; margin-bottom: 10px; display: inline-block; }
+  .feature { padding: 28px; margin-bottom: 20px; }
+  .feature h3 { font-size: 20px; margin-bottom: 12px; }
+  .feature p { font-size: 14px; margin-bottom: 12px; }
+  .high-value { padding: 28px; margin-bottom: 20px; }
+  .high-value h2 { font-size: 22px; margin-bottom: 12px; }
+  .high-value p { font-size: 14px; margin-bottom: 18px; }
+  .quote-btn { padding: 12px 32px; font-size: 14px; }
+  .sections { grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px; }
+  .card { padding: 28px; }
+  .card h3 { font-size: 18px; margin-bottom: 12px; }
+  .card p { font-size: 14px; }
+  footer { padding: 40px 24px; font-size: 13px; }
 }
 
 @media (max-width: 480px) {
-  main { padding: 80px 20px 60px; }
-  .hero h1 { font-size: 28px; }
-  .hero p { font-size: 15px; }
-  .feature { padding: 24px; }
-  .card { padding: 28px; }
-  .buttons a { padding: 12px 20px; font-size: 14px; margin-right: 10px; }
+  .header-inner { padding: 12px 16px; }
+  .brand img { height: 60px; }
+  main { padding: 30px 12px 40px; }
+  .hero { gap: 20px; margin-bottom: 20px; }
+  .hero h1 { font-size: 26px; line-height: 1.2; margin-bottom: 12px; }
+  .hero p { font-size: 14px; margin-bottom: 20px; }
+  .buttons a { padding: 10px 20px; font-size: 13px; margin-right: 8px; margin-bottom: 8px; }
+  .feature { padding: 20px; margin-bottom: 15px; }
+  .feature h3 { font-size: 18px; margin-bottom: 12px; }
+  .feature p { font-size: 13px; margin-bottom: 10px; }
+  .high-value { padding: 20px; margin-bottom: 15px; }
+  .high-value h2 { font-size: 20px; margin-bottom: 12px; }
+  .high-value p { font-size: 13px; margin-bottom: 16px; }
+  .quote-btn { padding: 10px 28px; font-size: 13px; }
+  .sections { gap: 16px; margin-bottom: 30px; }
+  .card { padding: 20px; }
+  .card h3 { font-size: 16px; margin-bottom: 10px; }
+  .card p { font-size: 13px; margin-bottom: 12px; }
+  .card a { font-size: 13px !important; }
+  footer { padding: 28px 16px; font-size: 12px; }
+  footer a { margin-right: 12px; }
 }
 </style>
 </head>
@@ -304,7 +368,7 @@ footer a:hover { color: var(--blue-primary); }
       </p>
       <div class="buttons">
         <a class="primary" href="https://www.ebay.co.uk/usr/card-collectables">Visit our eBay Store</a>
-        <a class="secondary" href="C:\Users\aaron\Desktop\CardCollectables\Submission.html">Sell Your Bulk</a>
+        <a class="secondary" href="Submission.html">Sell Your Bulk</a>
       </div>
     </div>
     <div class="feature">
@@ -319,18 +383,27 @@ footer a:hover { color: var(--blue-primary); }
     </div>
   </section>
 
+  <section class="high-value">
+    <h2>High-Value Individual Cards</h2>
+    <p>Have rare or valuable cards you'd like to get appraised? We're always interested in discussing high-grade singles and graded collections. Contact us for a personalized quote.</p>
+    <a href="mailto:contact@cardcollectables.com" class="quote-btn">Request a Quote</a>
+  </section>
+
   <section class="sections">
     <div class="card">
-      <h3>Sell Bulk</h3>
-      <p>Have Pokémon bulk or a small collection? Submit the details and we’ll let you know if it’s a good fit.</p>
+      <h3>📦 Bulk Collections</h3>
+      <p>We buy Pokémon card bulk and collections of all sizes. Submit the details of your collection and receive a fair, transparent offer within 24-48 hours.</p>
+      <a href="Submission.html" style="display: inline-block; margin-top: 16px; color: var(--blue-primary); text-decoration: none; font-weight: 600;">Start a Submission →</a>
     </div>
     <div class="card">
-      <h3>Where we sell</h3>
-      <p>Our cards are sold primarily on eBay, offering transparency through public feedback and buyer protections.</p>
+      <h3>💎 Graded Cards & High-Value</h3>
+      <p>Specialized in appraising PSA, BGS, and CGC graded cards. Whether you have a vintage holographic or a modern grade, we provide competitive valuations.</p>
+      <a href="mailto:contact@cardcollectables.com" style="display: inline-block; margin-top: 16px; color: var(--blue-primary); text-decoration: none; font-weight: 600;">Get a Quote →</a>
     </div>
     <div class="card">
-      <h3>What’s new</h3>
-      <p>Updates on recent purchases, changes to bulk intake, and future plans will be shared here as CardCollectables grows.</p>
+      <h3>🛒 eBay Resale</h3>
+      <p>Cards we acquire are carefully listed on eBay with professional photography and detailed descriptions. Every sale includes buyer protection and transparent feedback.</p>
+      <a href="https://www.ebay.co.uk/usr/card-collectables" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 16px; color: var(--blue-primary); text-decoration: none; font-weight: 600;">Browse Inventory →</a>
     </div>
   </section>
 </main>

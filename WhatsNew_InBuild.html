@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>What’s New | CardCollectables</title>
+<meta name="description" content="See the latest Pokémon cards and collections available from CardCollectables.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --blue-primary: #5f86b8;
+  --blue-dark: #4a6f9c;
+  --green-accent: #4f7c64;
+  --background: #eef3f9;
+  --surface: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #4b5563;
+  --border: rgba(95,134,184,0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* ================= HEADER ================= */
+header {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 26px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand img { height: 90px; }
+
+nav.desktop-nav {
+  display: flex;
+  gap: 40px;
+}
+
+nav.desktop-nav a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--text-main);
+  position: relative;
+}
+
+nav.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: var(--blue-primary);
+  transition: width 0.25s ease;
+}
+
+nav.desktop-nav a:hover::after { width: 100%; }
+
+/* ================= HAMBURGER ================= */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger div {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-main);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active div:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active div:nth-child(2) { opacity: 0; }
+.hamburger.active div:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ================= MOBILE NAV ================= */
+nav.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--surface);
+  padding: 20px 36px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
+}
+
+nav.mobile-nav.active {
+  max-height: 500px;
+  opacity: 1;
+}
+
+nav.mobile-nav a {
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-main);
+  font-size: 18px;
+}
+
+/* ================= MAIN ================= */
+main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 80px 24px 120px;
+}
+
+.whatsnew-wrapper { max-width: 1240px; margin: 0 auto; }
+
+.whatsnew-title { 
+  font-size: 36px; 
+  margin-bottom: 12px; 
+  text-align: center; 
+}
+
+.whatsnew-subheader {
+  font-size: 18px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.tile {
+  background: linear-gradient(180deg,#ffffff 0%,#f7fafd 100%);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 24px 55px rgba(95,134,184,0.18);
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 32px 75px rgba(95,134,184,0.25);
+}
+
+.gallery-wrapper {
+  position: relative;
+}
+
+.gallery-wrapper img {
+  width: 100%;
+  border-radius: 12px;
+  cursor: pointer;
+  display: block;
+}
+
+/* Gallery buttons */
+.gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(95,134,184,0.7);
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  z-index: 10;
+}
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+/* ================= MODAL ================= */
+#modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+#modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 16px;
+}
+
+#modal.close {
+  cursor: pointer;
+}
+
+.tile h3 {
+  font-size: 20px;
+  margin: 8px 0;
+}
+
+.tile p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ================= FOOTER ================= */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 24px;
+  max-width: 1240px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+footer a { color: var(--text-muted); text-decoration: none; margin-right: 20px; }
+footer a:hover { color: var(--blue-primary); }
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .header-inner { flex-wrap: wrap; }
+  nav.desktop-nav { display: none; }
+  .hamburger { display: flex; }
+  main { padding: 60px 16px 80px; }
+}
+
+@media (max-width: 480px) {
+  .whatsnew-title { font-size: 28px; margin-bottom: 24px; }
+  .tile h3 { font-size: 18px; }
+  .tile p { font-size: 13px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <img src="images/LogoFull.png" alt="CardCollectables Logo">
+    </div>
+
+    <nav class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="Submission.html">Sell Bulk</a>
+      <a href="About.html">About</a>
+      <a href="WhatsNew.html">What’s New</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger">
+      <div></div><div></div><div></div>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="index.html">Home</a>
+      <a href="Submission.html">Sell Bulk</a>
+      <a href="About.html">About</a>
+      <a href="WhatsNew.html">What’s New</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="whatsnew-wrapper">
+    <h1 class="whatsnew-title">What’s New</h1>
+    <h2 class="whatsnew-subheader">New Pokémon cards recently added to our eBay listings.</h2>
+
+    <div id="listings-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
+      <p style="text-align: center; color: var(--text-muted); grid-column: 1 / -1;">Loading your live listings...</p>
+    </div>
+  </section>
+</main>
+
+
+
+<!-- Zoom Modal -->
+<div id="modal">
+  <img src="" alt="Zoomed Card">
+</div>
+
+<footer>
+  <p>© CardCollectables<br>Independent reseller of authentic Pokémon trading cards.</p>
+  <p><a href="https://www.ebay.co.uk/usr/card-collectables">eBay</a></p>
+</footer>
+
+<script>
+// Hamburger toggle
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileNav.classList.toggle('active');
+});
+
+// Gallery functionality
+document.querySelectorAll('.tile').forEach(tile => {
+  const imgs = tile.querySelectorAll('.gallery-wrapper img');
+  let index = 0;
+
+  const showImage = i => {
+    imgs.forEach((img, idx) => img.style.display = (idx === i ? 'block' : 'none'));
+  }
+
+  tile.querySelector('.next-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    index = (index + 1) % imgs.length;
+    showImage(index);
+  });
+
+  tile.querySelector('.prev-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    index = (index - 1 + imgs.length) % imgs.length;
+    showImage(index);
+  });
+
+  // Zoom functionality
+  imgs.forEach(img => {
+    img.addEventListener('click', () => {
+      const modal = document.getElementById('modal');
+      modal.style.display = 'flex';
+      modal.querySelector('img').src = img.src;
+    });
+  });
+});
+
+// Close modal on click
+document.getElementById('modal').addEventListener('click', () => {
+  document.getElementById('modal').style.display = 'none';
+});
+
+// --- Fetch and render live eBay listings from generated JSON ---
+(async function loadListings() {
+  const container = document.getElementById('listings-container');
+  
+  try {
+    const res = await fetch('/data/listings.json');
+    if (!res.ok) throw new Error('Failed to fetch listings.json');
+    
+    const listings = await res.json();
+    if (!Array.isArray(listings) || listings.length === 0) {
+      throw new Error('No listings in data file');
+    }
+    
+    // Render
+    container.innerHTML = '';
+    const now = Date.now();
+    const FIVE_DAYS_MS = 5 * 24 * 60 * 60 * 1000;
+
+    listings.forEach(item => {
+      const listingDate = new Date(item.listingDate);
+      const isNew = (now - listingDate.getTime()) <= FIVE_DAYS_MS;
+      
+      const card = document.createElement('a');
+      card.href = item.url || `https://www.ebay.co.uk/usr/card-collectables`;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.style.textDecoration = 'none';
+      card.style.color = 'inherit';
+      card.className = 'tile';
+      
+      const html = `
+        <div style="position: relative; height: 100%;">
+          ${isNew ? '<span style="position: absolute; top: 8px; left: 8px; background: #dc2626; color: #fff; padding: 4px 6px; font-size: 11px; font-weight: 700; border-radius: 6px;">NEW</span>' : ''}
+          <div style="padding: 12px;">
+            <h3 style="font-size: 14px; margin: 0 0 8px; word-break: break-word;">${item.title}</h3>
+            <p style="font-size: 13px; color: var(--blue-primary); font-weight: 600; margin: 8px 0 0;">£${item.price}</p>
+          </div>
+        </div>
+      `;
+      card.innerHTML = html;
+      container.appendChild(card);
+    });
+
+  } catch (e) {
+    console.error('Failed to load listings:', e);
+    container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #dc2626;">Unable to load listings. <a href="https://www.ebay.co.uk/usr/card-collectables" target="_blank">View on eBay</a></p>';
+  }
+})();
+</script>
+</body>
+</html>
