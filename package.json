@@ -1,0 +1,12 @@
+{
+  "name": "cardcollectables-ebay-scraper",
+  "version": "1.0.0",
+  "description": "Fetch live eBay listings and generate listings.json",
+  "main": "scripts/fetch-listings.js",
+  "scripts": {
+    "fetch:listings": "node scripts/fetch-listings.js"
+  },
+  "dependencies": {
+    "ebay-api": "^4.3.0"
+  }
+}

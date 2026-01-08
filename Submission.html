@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sell Bulk | CardCollectables</title>
+<meta name="description" content="Estimate the value of your Pokémon bulk and submit details to CardCollectables for review.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --blue-primary: #5f86b8;
+  --blue-dark: #4a6f9c;
+  --green-accent: #4f7c64;
+  --background: #eef3f9;
+  --surface: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #4b5563;
+  --border: rgba(95,134,184,0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* ================= HEADER ================= */
+header {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 26px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand img { height: 90px; }
+
+nav.desktop-nav {
+  display: flex;
+  gap: 40px;
+}
+
+nav.desktop-nav a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--text-main);
+  position: relative;
+}
+
+nav.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: var(--blue-primary);
+  transition: width 0.25s ease;
+}
+
+nav.desktop-nav a:hover::after { width: 100%; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger div {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-main);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active div:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active div:nth-child(2) { opacity: 0; }
+.hamburger.active div:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Mobile nav */
+nav.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--surface);
+  padding: 20px 36px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
+}
+
+nav.mobile-nav.active {
+  max-height: 500px;
+  opacity: 1;
+}
+
+nav.mobile-nav a {
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-main);
+  font-size: 18px;
+}
+
+/* ================= MAIN ================= */
+main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 60px 36px 80px;
+}
+
+.bulk-wrapper { max-width: 900px; margin: 0 auto; }
+
+.bulk-card {
+  background: linear-gradient(180deg,#ffffff 0%,#f7fafd 100%);
+  border-radius: 26px;
+  padding: 12px 32px 32px;
+  box-shadow: 0 32px 75px rgba(95,134,184,0.18);
+  border: 1px solid var(--border);
+}
+
+.bulk-card {
+  background: linear-gradient(180deg,#ffffff 0%,#f7fafd 100%);
+  border-radius: 26px;
+  padding: 12px 32px 32px;
+  box-shadow: 0 32px 75px rgba(95,134,184,0.18);
+  border: 1px solid var(--border);
+}
+.bulk-card h1 {
+  font-size: 42px;
+  margin: 0 0 18px 0;
+}
+/* ===== TABLE FIX ===== */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table.pricing {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+table.pricing th, table.pricing td {
+  padding: 18px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+table.pricing thead th {
+  border-bottom: 2px solid var(--border);
+  color: var(--text-muted);
+}
+
+table.pricing input {
+  width: 110px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 15px;
+}
+
+.row-total { font-weight: 600; }
+
+#grand-total {
+  color: var(--blue-primary);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.primary {
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: var(--blue-primary);
+  box-shadow: 0 12px 28px rgba(95,134,184,0.35);
+}
+
+.bulk-alert {
+  background: rgba(185, 28, 28, 0.08);
+  border: 1px solid rgba(185, 28, 28, 0.25);
+  color: #7f1d1d;
+  padding: 18px 22px;
+  border-radius: 14px;
+  font-size: 15px;
+  margin-top: 12px;
+  margin-bottom: 28px;
+}
+
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 36px;
+  max-width: 1240px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav.desktop-nav { display: none; }
+  .hamburger { display: flex; }
+  main { padding: 12px 16px 60px; }
+  .bulk-card { padding: 12px 20px 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <img src="images/LogoFull.png" alt="CardCollectables Logo">
+    </div>
+
+    <nav class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="Submission.html">Sell Bulk</a>
+      <a href="About.html">About</a>
+      <a href="WhatsNew.html">What’s New</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger">
+      <div></div><div></div><div></div>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="index.html">Home</a>
+      <a href="Submission.html">Sell Bulk</a>
+      <a href="About.html">About</a>
+      <a href="WhatsNew.html">What’s New</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+let submissionsOpen = true;
+
+async function checkBulkStatus() {
+  try {
+    const res = await fetch("./bulk-status-closed.json");
+    const data = await res.json();
+
+    submissionsOpen = data.open;
+
+    if (!data.open) {
+      const button = document.querySelector(".primary");
+      button.disabled = true;
+      button.textContent = "Submissions Closed";
+
+      const alert = document.createElement("div");
+      alert.className = "bulk-alert";
+      alert.textContent = data.message;
+
+      const card = document.querySelector(".bulk-card");
+      card.insertBefore(alert, card.firstChild);
+    }
+  } catch (e) {
+    console.error("Could not check bulk status", e);
+  }
+}
+
+checkBulkStatus();
+</script>
+
+
+
+<main>
+<section class="bulk-wrapper">
+<div class="bulk-card">
+
+<h1>Sell Pokémon Bulk</h1>
+<p class="intro">Use the table below to estimate the value of your Pokémon bulk.</p>
+
+<form id="bulkForm">
+<div class="table-scroll">
+<table class="pricing">
+<thead>
+<tr><th>Card Type</th><th>Price</th><th>Quantity</th><th>Total</th></tr>
+</thead>
+<tbody>
+<tr data-price="0.0125"><td>Trainers</td><td>£0.0125</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
+<tr data-price="0.0125"><td>Common / Uncommon</td><td>£0.0125</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
+<tr data-price="0.03"><td>Black Rare</td><td>£0.03</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
+<tr data-price="0.05"><td>Reverse Holo</td><td>£0.05</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
+<tr data-price="0.06"><td>Holo</td><td>£0.06</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
+<tr data-price="0.30"><td>V and Above</td><td>£0.30</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
+</tbody>
+<tfoot>
+<tr>
+<th colspan="2">Estimated Total</th>
+<th id="total-qty">0</th>
+<th id="grand-total">£0.00</th>
+</tr>
+</tfoot>
+</table>
+</div>
+
+<button type="submit" class="primary">Submit Bulk Estimate</button>
+</form>
+
+</div>
+</section>
+</main>
+
+<footer>
+<p>© CardCollectables<br>Independent reseller of authentic Pokémon trading cards.</p>
+<p><a href="https://www.ebay.co.uk/usr/card-collectables">eBay</a></p>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileNav.classList.toggle('active');
+});
+</script>
+
+<script>
+const endpoint = "https://formspree.io/f/xrebewld";
+const rows = document.querySelectorAll("tbody tr");
+const form = document.getElementById("bulkForm");
+
+function generateSubmissionId() {
+  const d = new Date();
+  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const yy = String(d.getFullYear()).slice(2);
+  const dateKey = `${dd}${mm}${yy}`;
+  const storageKey = `cc-counter-${dateKey}`;
+  let counter = parseInt(localStorage.getItem(storageKey)) || 0;
+  counter += 1;
+  localStorage.setItem(storageKey, counter);
+  return `CC-${dateKey}-${String(counter).padStart(3, "0")}`;
+}
+
+const submissionId = generateSubmissionId();
+sessionStorage.setItem("submission_id", submissionId);
+
+function calculate() {
+  let qty = 0, total = 0, breakdown = [];
+
+  rows.forEach(row => {
+    const price = +row.dataset.price;
+    const count = +row.querySelector("input").value || 0;
+    qty += count;
+    total += price * count;
+    if (count) breakdown.push(`${row.children[0].textContent}: ${count}`);
+    row.querySelector(".row-total").textContent = "£" + (price * count).toFixed(2);
+  });
+
+  document.getElementById("total-qty").textContent = qty;
+  document.getElementById("grand-total").textContent = "£" + total.toFixed(2);
+
+  return { submissionId, qty, total, breakdown };
+}
+
+rows.forEach(r => r.querySelector("input").addEventListener("input", calculate));
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const data = calculate();
+
+  await fetch(endpoint, {
+    method: "POST",
+    headers: { "Accept": "application/json" },
+    body: JSON.stringify({
+      submission_id: data.submissionId,
+      total_quantity: data.qty,
+      estimated_value: "£" + data.total.toFixed(2),
+      breakdown: data.breakdown.join(", ")
+    })
+  });
+
+  window.location.href = "thank-you.html";
+});
+</script>
+
+</body>
+</html>
