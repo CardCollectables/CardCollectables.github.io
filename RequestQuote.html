@@ -314,18 +314,18 @@ footer {
 <form id="quoteForm">
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
     <div class="form-field">
-      <label class="form-label">Name *</label>
-      <input type="text" name="name" required class="form-input">
+      <label class="form-label">Full Name *</label>
+      <input type="text" id="name" name="name" required class="form-input">
     </div>
     <div class="form-field">
       <label class="form-label">Email Address *</label>
-      <input type="email" name="email" required class="form-input">
+      <input type="email" id="email" name="email" required class="form-input">
     </div>
   </div>
 
   <div class="form-field">
     <label class="form-label">PayPal Address *</label>
-    <input type="email" name="paypal_address" required class="form-input">
+    <input type="email" id="paypal" name="paypal_address" required class="form-input">
   </div>
 
   <div style="margin-bottom: 12px; padding: 12px; background: rgba(79,124,100,0.08); border-radius: 8px;">
@@ -340,7 +340,7 @@ footer {
 
   <div class="form-field">
     <label class="form-label">Cards and Conditions *</label>
-    <textarea name="cards_and_conditions" required placeholder="Describe your cards and their condition..." class="form-input" style="resize: vertical;" rows="6"></textarea>
+    <textarea id="cards" name="cards_and_conditions" required placeholder="Describe your cards and their condition..." class="form-input" style="resize: vertical;" rows="6"></textarea>
   </div>
 
   <button type="submit" class="primary">Request Quote</button>
@@ -379,11 +379,12 @@ function generateQuoteId() {
   return `QT-${dateKey}-${String(counter).padStart(3, "0")}`;
 }
 
-const quoteId = generateQuoteId();
-sessionStorage.setItem("quote_id", quoteId);
-
 form.addEventListener('submit', async e => {
   e.preventDefault();
+
+  // Generate quote ID only when form is actually submitted
+  const quoteId = generateQuoteId();
+  sessionStorage.setItem("quote_id", quoteId);
 
   const formData = {
     quote_id: quoteId,
@@ -396,12 +397,17 @@ form.addEventListener('submit', async e => {
   try {
     const response = await fetch(endpoint, {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
+      headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(formData)
     });
 
     if (response.ok) {
       window.location.href = 'thank-you-quotation.html';
+    } else {
+      alert('There was an error submitting your request. Please try again.');
     }
   } catch (error) {
     console.error('Error submitting form:', error);

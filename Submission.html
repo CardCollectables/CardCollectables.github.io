@@ -483,7 +483,7 @@ checkBulkStatus();
       <li>Enter your card quantities in the table below</li>
       <li>Fill in your contact details and submit</li>
       <li>We'll review and email you postage labels once approved</li>
-      <li>We process submissions within <strong>2-3 days of receipt</strong></li>
+      <li>We process submissions within <strong>2 days of receipt</strong></li>
     </ol>
   </div>
 
@@ -499,7 +499,7 @@ checkBulkStatus();
   
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
     <div class="form-field">
-      <label class="form-label">Name *</label>
+      <label class="form-label">Full Name *</label>
       <input type="text" name="name" required class="form-input">
     </div>
     <div class="form-field">
@@ -533,7 +533,7 @@ checkBulkStatus();
 <tbody>
 <tr data-price="0.0125"><td>Trainers</td><td>£0.0125</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
 <tr data-price="0.0125"><td>Common / Uncommon</td><td>£0.0125</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
-<tr data-price="0.03"><td>Black Rare</td><td>£0.03</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
+<tr data-price="0.03"><td>Normal Rare</td><td>£0.03</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
 <tr data-price="0.05"><td>Reverse Holo</td><td>£0.05</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
 <tr data-price="0.06"><td>Holo</td><td>£0.06</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
 <tr data-price="0.30"><td>V and Above</td><td>£0.30</td><td><input type="number" min="0" value="0"></td><td class="row-total">£0.00</td></tr>
@@ -649,9 +649,6 @@ function generateSubmissionId() {
   return `CC-${dateKey}-${String(counter).padStart(3, "0")}`;
 }
 
-const submissionId = generateSubmissionId();
-sessionStorage.setItem("submission_id", submissionId);
-
 function calculate() {
   let qty = 0, total = 0, breakdown = [];
 
@@ -667,7 +664,7 @@ function calculate() {
   document.getElementById("total-qty").textContent = qty;
   document.getElementById("grand-total").textContent = "£" + total.toFixed(2);
 
-  return { submissionId, qty, total, breakdown };
+  return { qty, total, breakdown };
 }
 
 rows.forEach(r => r.querySelector("input").addEventListener("input", calculate));
@@ -675,6 +672,20 @@ rows.forEach(r => r.querySelector("input").addEventListener("input", calculate))
 form.addEventListener("submit", async e => {
   e.preventDefault();
   const data = calculate();
+  
+  // Validate quantity range
+  if (data.qty < 2000) {
+    alert("Minimum submission is 2,000 cards. You currently have " + data.qty + " cards.");
+    return;
+  }
+  if (data.qty > 20000) {
+    alert("Maximum submission is 20,000 cards. You currently have " + data.qty + " cards. Please contact us for larger quantities.");
+    return;
+  }
+
+  // Generate submission ID only when form is actually submitted
+  const submissionId = generateSubmissionId();
+  sessionStorage.setItem("submission_id", submissionId);
   
   const formData = new FormData(form);
   const payload = {
