@@ -206,6 +206,18 @@ table.pricing input {
   color: #fff;
   background-color: var(--blue-primary);
   box-shadow: 0 12px 28px rgba(95,134,184,0.35);
+  transition: background-color 0.2s ease;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.primary:hover {
+  background-color: var(--blue-dark);
+}
+
+.primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .bulk-alert {
@@ -219,6 +231,65 @@ table.pricing input {
   margin-bottom: 28px;
 }
 
+/* Form styles */
+.form-field {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text-main);
+  font-size: 15px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 0 3px rgba(95,134,184,0.1);
+}
+
+.section-box {
+  background: linear-gradient(160deg, #f0f6f3, #e8f3ee);
+  border: 1px solid rgba(79,124,100,0.2);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+}
+
+.section-title {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--green-accent);
+  font-size: 20px;
+}
+
+.info-box {
+  background: rgba(59, 130, 246, 0.08);
+  border-left: 3px solid var(--blue-primary);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.warning-box {
+  background: rgba(185, 28, 28, 0.08);
+  border-left: 3px solid #b91c1c;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
 
 /* Footer */
 footer {
@@ -234,8 +305,63 @@ footer {
 @media (max-width: 768px) {
   nav.desktop-nav { display: none; }
   .hamburger { display: flex; }
-  main { padding: 12px 16px 60px; }
-  .bulk-card { padding: 12px 20px 20px; }
+  main { padding: 40px 16px 60px; }
+  .bulk-card { padding: 20px; }
+  .bulk-card h1 { font-size: 32px; }
+  
+  .section-box {
+    padding: 20px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+  }
+  
+  table.pricing {
+    font-size: 14px;
+  }
+  
+  table.pricing th, table.pricing td {
+    padding: 12px 8px;
+  }
+  
+  table.pricing input {
+    width: 80px;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner { padding: 12px 16px; }
+  .brand img { height: 60px; }
+  main { padding: 30px 12px 40px; }
+  .bulk-card { padding: 20px; }
+  .bulk-card h1 { font-size: 26px; }
+  
+  .section-box {
+    padding: 16px;
+  }
+  
+  .section-title {
+    font-size: 16px;
+  }
+  
+  table.pricing {
+    font-size: 13px;
+  }
+  
+  table.pricing th, table.pricing td {
+    padding: 10px 6px;
+  }
+  
+  table.pricing input {
+    width: 70px;
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+  
+  footer { padding: 28px 16px; font-size: 12px; }
 }
 </style>
 </head>
@@ -251,8 +377,8 @@ footer {
     <nav class="desktop-nav">
       <a href="index.html">Home</a>
       <a href="Submission.html">Sell Bulk</a>
+      <a href="RequestQuote.html">Request Quote</a>
       <a href="About.html">About</a>
-      <a href="WhatsNew.html">What’s New</a>
     </nav>
 
     <div class="hamburger" id="hamburger">
@@ -262,8 +388,9 @@ footer {
     <nav class="mobile-nav" id="mobileNav">
       <a href="index.html">Home</a>
       <a href="Submission.html">Sell Bulk</a>
+      <a href="RequestQuote.html">Request Quote</a>
       <a href="About.html">About</a>
-      <a href="WhatsNew.html">What’s New</a>
+
     </nav>
   </div>
 </header>
@@ -273,7 +400,7 @@ let submissionsOpen = true;
 
 async function checkBulkStatus() {
   try {
-    const res = await fetch("./bulk-status-closed.json");
+    const res = await fetch("./bulk-status-open.json");
     const data = await res.json();
 
     submissionsOpen = data.open;
@@ -304,10 +431,92 @@ checkBulkStatus();
 <section class="bulk-wrapper">
 <div class="bulk-card">
 
-<h1>Sell Pokémon Bulk</h1>
-<p class="intro">Use the table below to estimate the value of your Pokémon bulk.</p>
+<h1>Pokemon Bulk Submission</h1>
+<p class="intro" style="color: var(--text-muted); margin-bottom: 24px;">Use the table below to estimate the value of your Pokémon bulk.</p>
+
+<div class="section-box">
+  <h3 class="section-title">📋 Submission Guidelines</h3>
+  
+  <div style="margin-bottom: 16px;">
+    <strong style="color: var(--text-main);">Minimum Requirements:</strong>
+    <ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted);">
+      <li>Minimum of <strong>2,000 cards</strong> total</li>
+      <li>All cards must be <strong>95% Near Mint condition</strong></li>
+      <li><strong>English language only</strong></li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom: 16px;">
+    <strong style="color: var(--text-main);">Packing Instructions (Important!):</strong>
+    <ul style="margin: 8px 0; padding-left: 20px; color: var(--text-muted); line-height: 1.7;">
+      <li><strong>Pack tightly</strong> to ensure cards remain safe in transit</li>
+      <li><strong>Separate by rarity:</strong>
+        <ul style="margin-top: 4px; padding-left: 20px;">
+          <li>Commons/Uncommons together</li>
+          <li>Trainers together</li>
+          <li>Rare Non-Holos together</li>
+          <li>Reverse holographic cards together</li>
+          <li>All holographic cards together</li>
+          <li>All other cards together (V's, GX's, EX's and above)</li>
+        </ul>
+      </li>
+      <li><strong>We do not accept any cards that are not listed in the form below.</strong></li>
+    </ul>
+  </div>
+
+  <div style="background: rgba(185, 28, 28, 0.08); border-left: 3px solid #b91c1c; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;">
+    <strong style="color: #7f1d1d;">⚠️ Sorting Fee:</strong>
+    <span style="color: #7f1d1d; font-size: 14px;"> If cards are not separated by rarity, a sorting fee may apply based on time taken to sort them - this will also affect processing and payment speeds.</span>
+  </div>
+
+  <div style="margin-bottom: 8px;">
+    <strong style="color: var(--text-main);">How It Works:</strong>
+    <ol style="margin: 8px 0; padding-left: 20px; color: var(--text-muted);">
+      <li>Enter your card quantities in the table below</li>
+      <li>Fill in your contact details and submit</li>
+      <li>We'll review and email you postage labels once approved</li>
+      <li>We process submissions within <strong>2-3 days of receipt</strong></li>
+    </ol>
+  </div>
+
+  <div style="font-size: 14px; color: var(--text-muted); margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(79,124,100,0.15);">
+    <strong>Questions?</strong> Contact us at <a href="mailto:cardcollectables@outlook.com" style="color: var(--blue-primary); text-decoration: none;">cardcollectables@outlook.com</a>
+  </div>
+</div>
 
 <form id="bulkForm">
+
+<div style="margin-bottom: 32px;">
+  <h3 style="margin-top: 0; margin-bottom: 20px; color: var(--blue-primary); font-size: 20px;">Your Details</h3>
+  
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div class="form-field">
+      <label class="form-label">Name *</label>
+      <input type="text" name="name" required class="form-input">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Email Address *</label>
+      <input type="email" name="email" required class="form-input">
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label class="form-label">PayPal Email Address *</label>
+    <input type="email" name="paypal_email" required class="form-input">
+  </div>
+
+  <div class="form-field">
+    <label class="form-label">Additional Notes</label>
+    <textarea name="additional_notes" rows="4" class="form-input" style="resize: vertical;"></textarea>
+  </div>
+
+  <div class="info-box">
+    <span style="color: var(--text-main); font-size: 14px; line-height: 1.6;"><strong>Note:</strong> Maximum submission is <strong>20,000 cards</strong>. If you have more than this, please contact us directly at <a href="mailto:cardcollectables@outlook.com" style="color: var(--blue-primary); text-decoration: none;">cardcollectables@outlook.com</a></span>
+  </div>
+</div>
+
+<h3 style="margin-top: 0; margin-bottom: 16px; color: var(--blue-primary); font-size: 20px;">Card Quantities</h3>
+
 <div class="table-scroll">
 <table class="pricing">
 <thead>
@@ -331,6 +540,68 @@ checkBulkStatus();
 </table>
 </div>
 
+<div class="section-box" style="margin-top: 32px;">
+  <h3 class="section-title">📦 Shipping Information</h3>
+  
+  <div class="form-field">
+    <label class="form-label">Can you print your own shipping label? *</label>
+    <select name="can_print_label" required class="form-input" style="background: white;">
+      <option value="">Please select...</option>
+      <option value="yes">Yes, I can print my own label</option>
+      <option value="no">No, please provide a QR code for the post office</option>
+    </select>
+    <p style="font-size: 13px; color: var(--text-muted); margin: 6px 0 0 0;">If you can't print a label, we'll supply a QR code which can be scanned at the post office.</p>
+  </div>
+
+  <div class="info-box">
+    <p style="margin: 0; color: var(--text-main); font-size: 14px; line-height: 1.6;"><strong>Important:</strong> Please provide accurate package specifications so we can supply the correct label. Inside your package, you <strong>must include</strong> your name, email address, and submission reference number (provided after clicking submit).</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 16px;">
+    <div class="form-field">
+      <label class="form-label">Box Length (CM) *</label>
+      <input type="number" name="box_length" required min="1" step="0.1" class="form-input">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Box Width (CM) *</label>
+      <input type="number" name="box_width" required min="1" step="0.1" class="form-input">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Box Height (CM) *</label>
+      <input type="number" name="box_height" required min="1" step="0.1" class="form-input">
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label class="form-label">Box Weight (KG) *</label>
+    <input type="number" name="box_weight" required min="0.1" step="0.1" class="form-input">
+  </div>
+
+  <h4 style="margin-top: 24px; margin-bottom: 16px; color: var(--text-main); font-size: 16px;">Collection Address</h4>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div class="form-field">
+      <label class="form-label">House Number / Name *</label>
+      <input type="text" name="house_number" required class="form-input">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Street Name *</label>
+      <input type="text" name="street_name" required class="form-input">
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+    <div class="form-field">
+      <label class="form-label">Town *</label>
+      <input type="text" name="town" required class="form-input">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Postcode *</label>
+      <input type="text" name="postcode" required class="form-input" style="text-transform: uppercase;">
+    </div>
+  </div>
+</div>
+
 <button type="submit" class="primary">Submit Bulk Estimate</button>
 </form>
 
@@ -340,7 +611,6 @@ checkBulkStatus();
 
 <footer>
 <p>© CardCollectables<br></p>
-<p><a href="https://www.ebay.co.uk/usr/card-collectables">eBay</a></p>
 </footer>
 
 <script>
@@ -397,16 +667,32 @@ rows.forEach(r => r.querySelector("input").addEventListener("input", calculate))
 form.addEventListener("submit", async e => {
   e.preventDefault();
   const data = calculate();
+  
+  const formData = new FormData(form);
+  const payload = {
+    submission_id: data.submissionId,
+    name: formData.get('name'),
+    email: formData.get('email'),
+    paypal_email: formData.get('paypal_email'),
+    additional_notes: formData.get('additional_notes'),
+    total_quantity: data.qty,
+    estimated_value: "£" + data.total.toFixed(2),
+    breakdown: data.breakdown.join(", "),
+    can_print_label: formData.get('can_print_label'),
+    box_length: formData.get('box_length'),
+    box_width: formData.get('box_width'),
+    box_height: formData.get('box_height'),
+    box_weight: formData.get('box_weight'),
+    house_number: formData.get('house_number'),
+    street_name: formData.get('street_name'),
+    town: formData.get('town'),
+    postcode: formData.get('postcode')
+  };
 
   await fetch(endpoint, {
     method: "POST",
     headers: { "Accept": "application/json" },
-    body: JSON.stringify({
-      submission_id: data.submissionId,
-      total_quantity: data.qty,
-      estimated_value: "£" + data.total.toFixed(2),
-      breakdown: data.breakdown.join(", ")
-    })
+    body: JSON.stringify(payload)
   });
 
   window.location.href = "thank-you.html";

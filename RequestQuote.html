@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Request a Quote | CardCollectables</title>
+<meta name="description" content="Request a quote for your Pokémon cards from CardCollectables.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --blue-primary: #5f86b8;
+  --blue-dark: #4a6f9c;
+  --green-accent: #4f7c64;
+  --background: #eef3f9;
+  --surface: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #4b5563;
+  --border: rgba(95,134,184,0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* ================= HEADER ================= */
+header {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 26px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand img { height: 90px; }
+
+nav.desktop-nav {
+  display: flex;
+  gap: 40px;
+}
+
+nav.desktop-nav a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--text-main);
+  position: relative;
+}
+
+nav.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: var(--blue-primary);
+  transition: width 0.25s ease;
+}
+
+nav.desktop-nav a:hover::after { width: 100%; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger div {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-main);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active div:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active div:nth-child(2) { opacity: 0; }
+.hamburger.active div:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Mobile nav */
+nav.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--surface);
+  padding: 20px 36px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
+}
+
+nav.mobile-nav.active {
+  max-height: 500px;
+  opacity: 1;
+}
+
+nav.mobile-nav a {
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-main);
+  font-size: 18px;
+}
+
+/* ================= MAIN ================= */
+main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 60px 36px 60px;
+}
+
+.quote-wrapper { max-width: 900px; margin: 0 auto; }
+
+.quote-card {
+  background: linear-gradient(180deg,#ffffff 0%,#f7fafd 100%);
+  border-radius: 26px;
+  padding: 12px 32px 32px;
+  box-shadow: 0 32px 75px rgba(95,134,184,0.18);
+  border: 1px solid var(--border);
+}
+
+.quote-card h1 {
+  font-size: 42px;
+  margin: 0 0 18px 0;
+}
+
+/* Form styles */
+.form-field {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text-main);
+  font-size: 15px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 0 3px rgba(95,134,184,0.1);
+}
+
+.primary {
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: var(--blue-primary);
+  box-shadow: 0 12px 28px rgba(95,134,184,0.35);
+  transition: background-color 0.2s ease;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.primary:hover {
+  background-color: var(--blue-dark);
+}
+
+.primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.info-box {
+  background: rgba(59, 130, 246, 0.08);
+  border-left: 3px solid var(--blue-primary);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.section-box {
+  background: linear-gradient(160deg, #f0f6f3, #e8f3ee);
+  border: 1px solid rgba(79,124,100,0.2);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+}
+
+.section-title {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--green-accent);
+  font-size: 20px;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 36px;
+  max-width: 1240px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav.desktop-nav { display: none; }
+  .hamburger { display: flex; }
+  main { padding: 40px 16px 60px; }
+  .quote-card { padding: 20px; }
+  .quote-card h1 { font-size: 32px; }
+  
+  .section-box {
+    padding: 20px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner { padding: 12px 16px; }
+  .brand img { height: 60px; }
+  main { padding: 30px 12px 40px; }
+  .quote-card h1 { font-size: 26px; }
+  footer { padding: 28px 16px; font-size: 12px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <img src="images/LogoFull.png" alt="CardCollectables Logo">
+    </div>
+
+    <nav class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="Submission.html">Sell Bulk</a>
+      <a href="RequestQuote.html">Request Quote</a>
+      <a href="About.html">About</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger">
+      <div></div><div></div><div></div>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="index.html">Home</a>
+      <a href="Submission.html">Sell Bulk</a>
+      <a href="RequestQuote.html">Request Quote</a>
+      <a href="About.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="quote-wrapper">
+<div class="quote-card">
+
+<h1>Request a Quote</h1>
+<p class="intro" style="color: var(--text-muted); margin-bottom: 24px;">We are always interested in purchasing your unwanted single cards or full collections. Please fill out the form below and we'll get back to you shortly.</p>
+
+<div class="section-box">
+  <h3 class="section-title">💎 What We're Looking For</h3>
+  <ul style="margin: 8px 0 0 0; padding-left: 20px; color: var(--text-muted); line-height: 1.7;">
+    <li>Low to High value single cards</li>
+    <li>Graded cards</li>
+    <li>Modern rare cards (V, VMAX, VSTAR, Rainbow, Gold, etc.)</li>
+    <li>Vintage holographic cards</li>
+    <li>Complete collections of any size</li>
+  </ul>
+</div>
+
+<div class="info-box">
+  <p style="margin: 0; color: var(--text-main); font-size: 14px; line-height: 1.6;"><strong>📧 Response Time:</strong> We aim to respond to all quote requests within <strong>24-48 hours</strong>. Please provide as much detail as possible about your cards for an accurate valuation.</p>
+</div>
+
+<form id="quoteForm">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div class="form-field">
+      <label class="form-label">Name *</label>
+      <input type="text" name="name" required class="form-input">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Email Address *</label>
+      <input type="email" name="email" required class="form-input">
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label class="form-label">PayPal Address *</label>
+    <input type="email" name="paypal_address" required class="form-input">
+  </div>
+
+  <div style="margin-bottom: 12px; padding: 12px; background: rgba(79,124,100,0.08); border-radius: 8px;">
+    <p style="margin: 0 0 8px 0; font-weight: 600; color: var(--text-main); font-size: 15px;">📝 How to format your card details:</p>
+    <p style="margin: 0 0 8px 0; line-height: 1.6; font-size: 15px; color: var(--text-muted);">Please list each card with its set number and condition. For example:</p>
+    <p style="margin: 0 0 8px 0; padding-left: 16px; font-family: monospace; line-height: 1.8; font-size: 15px; color: var(--text-muted);">
+      Charizard VMAX SV107/SV122 - Near Mint<br>
+      Dragonite V 192/203 - Played
+    </p>
+    <p style="margin: 0; line-height: 1.6; font-size: 15px; color: var(--text-muted);"><strong style="color: var(--text-main);">Note:</strong> We may request photographs of your cards before making a final offer.</p>
+  </div>
+
+  <div class="form-field">
+    <label class="form-label">Cards and Conditions *</label>
+    <textarea name="cards_and_conditions" required placeholder="Describe your cards and their condition..." class="form-input" style="resize: vertical;" rows="6"></textarea>
+  </div>
+
+  <button type="submit" class="primary">Request Quote</button>
+</form>
+
+</div>
+</section>
+</main>
+
+<footer>
+<p>© CardCollectables<br></p>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileNav.classList.toggle('active');
+});
+
+const endpoint = "https://formspree.io/f/maqqwpde";
+const form = document.getElementById('quoteForm');
+
+function generateQuoteId() {
+  const d = new Date();
+  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const yy = String(d.getFullYear()).slice(2);
+  const dateKey = `${dd}${mm}${yy}`;
+  const storageKey = `cc-quote-counter-${dateKey}`;
+  let counter = parseInt(localStorage.getItem(storageKey)) || 0;
+  counter += 1;
+  localStorage.setItem(storageKey, counter);
+  return `QT-${dateKey}-${String(counter).padStart(3, "0")}`;
+}
+
+const quoteId = generateQuoteId();
+sessionStorage.setItem("quote_id", quoteId);
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+
+  const formData = {
+    quote_id: quoteId,
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    paypal_address: document.getElementById('paypal').value,
+    cards_and_conditions: document.getElementById('cards').value
+  };
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+
+    if (response.ok) {
+      window.location.href = 'thank-you-quotation.html';
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('There was an error submitting your request. Please try again.');
+  }
+});
+</script>
+
+</body>
+</html>

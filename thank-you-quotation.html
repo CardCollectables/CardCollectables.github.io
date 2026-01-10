@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Thank You | CardCollectables</title>
-  <meta name="description" content="Thank you for submitting your Pokémon bulk to CardCollectables.">
+  <title>Quote Request Received | CardCollectables</title>
+  <meta name="description" content="Thank you for requesting a quote from CardCollectables.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -337,25 +337,27 @@
 
       <div class="checkmark">✓</div>
 
-      <h1>Thank you for your submission</h1>
+      <h1>Thank you for your quote request</h1>
 
       <p>
-        We’ve received your bulk submission and will review the details shortly.
-        Every submission is checked manually to ensure fair and accurate pricing.
+        We've received your quote request and will review your cards shortly.
+        Our team will assess the details you provided and prepare a personalised quote.
       </p>
 
       <p>
-        If we are interested in your submission, we’ll be in touch with next steps.
+        We'll be in touch via email with our offer.
       </p>
 
-      <!-- Submission reference -->
+      <!-- Quote reference -->
       <div id="reference" class="reference" style="display:none;"></div>
 
       <div class="next-steps">
         <h3>What happens next?</h3>
         <ul>
-          <li>• Your submission is reviewed manually</li>
-          <li>• If we are interested in your submission, we'll provide you with a shipping label or QR code to send your cards to us</li>
+          <li>• Your request is reviewed by our team</li>
+          <li>• We assess the cards and conditions you've described</li>
+          <li>• You'll receive a detailed quote via email</li>
+          <li>• We'll provide you with a shipping label or QR code to send your cards to us if you accept our offer.</li>
           <li>• Once we receive your cards, we'll verify their condition and finalize the payment.</li>
         </ul>
       </div>
@@ -384,10 +386,10 @@
     mobileNav.classList.toggle('active');
   });
 
-  const submissionId = sessionStorage.getItem("submission_id");
-  if (submissionId) {
+  const quoteId = sessionStorage.getItem("quote_id");
+  if (quoteId) {
     const ref = document.getElementById("reference");
-    ref.textContent = "Submission reference: " + submissionId;
+    ref.textContent = "Quote reference: " + quoteId;
     ref.style.display = "inline-block";
   }
 </script>
