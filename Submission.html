@@ -401,7 +401,7 @@ let submissionsOpen = true;
 
 async function checkBulkStatus() {
   try {
-    const res = await fetch("./bulk-status-open.json");
+    const res = await fetch("./bulk-status-closed.json");
     const data = await res.json();
 
     submissionsOpen = data.open;
@@ -690,7 +690,7 @@ form.addEventListener("submit", async e => {
   
   const formData = new FormData(form);
   const payload = {
-    submission_id: data.submissionId,
+    submission_id: submissionId,
     name: formData.get('name'),
     email: formData.get('email'),
     paypal_email: formData.get('paypal_email'),
